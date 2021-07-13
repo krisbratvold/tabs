@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
 
+const tabs = [
+  { label: "Tab 1", content: "content 1" },
+  { label: "Tab 2", content: "content 2" },
+  { label: "Tab 3", content: "content 3" }
+];
 function App() {
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ paddingTop: 30, textAlign: "center" }}>
+      <div>
+        {tabs.map((tab,i) => {
+          const isSelected = tab === selectedTab;
+          return (<span key={i} style={{
+            border: "1px solid black",
+            padding: 10,
+            margin: 5,
+            backgroundColor: isSelected ? "black" : "white",
+            color: isSelected ? "white" : "black"
+          }}
+          onClick={(e) => {setSelectedTab(tab);}}
+          >{tab.label}</span>)
+        })}
+      </div>
+      <p style={{ border: "1px solid black", padding: 10 }}>{selectedTab.content}</p>
     </div>
   );
 }
